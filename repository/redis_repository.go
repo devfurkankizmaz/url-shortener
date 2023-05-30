@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/devfurkankizmaz/url-shortener/models"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -19,7 +18,12 @@ type RedisRepository struct {
 	client *redis.Client
 }
 
-func NewRedisRepository() models.RedisRepository {
+type RedisRepositoryImpl interface {
+	SaveShortURL(ctx context.Context, shortURLID string, longURL string) error
+	GetLongURL(ctx context.Context, shortURLID string) (string, error)
+}
+
+func NewRedisRepository() RedisRepositoryImpl {
 	return &RedisRepository{
 		client: GetRedisClient(),
 	}

@@ -5,15 +5,16 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/devfurkankizmaz/url-shortener/models"
+	"github.com/devfurkankizmaz/url-shortener/service"
+	models "github.com/devfurkankizmaz/url-shortener/types"
 	"github.com/labstack/echo/v4"
 )
 
 type ShortURLHandler struct {
-	service models.ShortURLService
+	service service.ShortURLServiceImpl
 }
 
-func NewShortURLHandler(service models.ShortURLService) *ShortURLHandler {
+func NewShortURLHandler(service service.ShortURLServiceImpl) *ShortURLHandler {
 	return &ShortURLHandler{service: service}
 }
 

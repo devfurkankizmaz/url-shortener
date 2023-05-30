@@ -4,15 +4,20 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/devfurkankizmaz/url-shortener/models"
+	"github.com/devfurkankizmaz/url-shortener/repository"
 	"github.com/devfurkankizmaz/url-shortener/utils"
 )
 
 type ShortURLService struct {
-	repo models.RedisRepository
+	repo repository.RedisRepositoryImpl
 }
 
-func NewShortURLService(repo models.RedisRepository) models.ShortURLService {
+type ShortURLServiceImpl interface {
+	CreateShortURL(ctx context.Context, longURL string) (string, error)
+	GetLongURL(ctx context.Context, shortURLID string) (string, error)
+}
+
+func NewShortURLService(repo repository.RedisRepositoryImpl) ShortURLServiceImpl {
 	return &ShortURLService{
 		repo: repo,
 	}
