@@ -1,4 +1,4 @@
-package models
+package types
 
 type CreateShortURLRequest struct {
 	OriginalURL string `json:"originalURL" binding:"required"`
